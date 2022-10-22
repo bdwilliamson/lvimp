@@ -1,7 +1,7 @@
 #' lvimp: Perform Inference on Summaries of Longidutinal Algorithm-Agnostic Variable Importance
 #'
 #'
-#' @section Authors
+#' @section Authors:
 #' \bold{Maintainer}: Brian Williamson \url{https://bdwilliamson.github.io/}
 #'
 #' Methodology authors:
