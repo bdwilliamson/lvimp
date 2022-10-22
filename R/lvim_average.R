@@ -27,13 +27,13 @@ lvim_average <- function(lvim, indices = 1:length(lvim)) {
   lvim$average_reduced_ci <- vimp::vimp_ci(est = lvim$average_reduced, se = lvim$average_reduced_se,
                                         scale = lvim$vims[[1]]$scale, level = 1 - lvim$vims[[1]]$alpha)
   lvim$average_ci <- vimp::vimp_ci(est = lvim$average_vim, se = lvim$average_se,
-                                        scale = lvim$vims[[1]]$scale, level = 1 - lvim$vims[[1]]$alpha)
+                                   scale = lvim$vims[[1]]$scale, level = 1 - lvim$vims[[1]]$alpha)
   if (!is.na(lvim$vims[[1]]$p_value)) {
     lvim$average_p_value <- vimp::vimp_hypothesis_test(
       predictiveness_full = lvim$average_full, predictiveness_reduced = lvim$average_reduced,
       se = lvim$average_se, delta = lvim$vims[[1]]$delta, alpha = lvim$vims[[1]]$alpha
 
-    )
+    )$p_value
   }
   return(lvim)
 }
