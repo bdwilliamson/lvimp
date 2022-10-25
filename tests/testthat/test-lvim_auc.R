@@ -46,11 +46,11 @@ vim_list_2 <- lapply(as.list(1:T), function(t) {
                SL.library = c("SL.glm"))
 })
 
-# test linear trend ------------------------------------------------------------
-test_that("Linear trend in VIMs across the time series works", {
+# test AUC of piecewise linear interpolator ------------------------------------
+test_that("AUC of piecewise linear interpolator of VIMs across the time series works", {
   lvim_obj <- lvim(vim_list_1[[1]], vim_list_1[[2]], vim_list_1[[3]], timepoints = 1:3)
-  est <- lvim_trend(lvim_obj, indices = 1:3)
-  expect_equal(est$trend_full, trend_full, tolerance = 0.1)
-  expect_equal(est$trend_reduced, trend_reduced, tolerance = 0.1)
-  expect_equal(est$trend_vim, trend_full - trend_reduced, tolerance = 0.1)
+  est <- lvim_auc(lvim_obj, indices = 1:3)
+  expect_equal(est$auc_full, auc_full, tolerance = 0.1)
+  expect_equal(est$auc_reduced, auc_reduced, tolerance = 0.1)
+  expect_equal(est$auc_vim, auc_full - auc_reduced, tolerance = 0.1)
 })
