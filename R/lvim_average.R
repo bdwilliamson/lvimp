@@ -3,13 +3,16 @@
 #' Compute a nonparametric estimate of (and efficient influence function for) the
 #' average longitudinal variable importance over a contiguous subset of the time series.
 #'
-#' @param lvim an object of class \code{lvim} containing the cross-sectional variable importance objects
-#' @param indices a numeric vector indicating the contiguous subset of the time series
+#' @param lvim an object of class \code{lvim} containing the cross-sectional
+#'   variable importance objects
+#' @param indices a numeric vector indicating the contiguous subset of the
+#'   time series
+#' @param delta null hypothesis value
 #'
 #' @return The \code{lvim} object, with point estimates, CIs, and p-values
 #'   related to the average variable importance filled in.
 #' @export
-lvim_average <- function(lvim, indices = 1:length(lvim)) {
+lvim_average <- function(lvim, indices = 1:length(lvim), delta = 0) {
   # estimate average predictiveness, VIM across the time points
   lvim$average_full <- mean(lvim$predictiveness_full)
   lvim$average_reduced <- mean(lvim$predictiveness_reduced)
@@ -29,9 +32,9 @@ lvim_average <- function(lvim, indices = 1:length(lvim)) {
   lvim$average_ci <- vimp::vimp_ci(est = lvim$average_vim, se = lvim$average_se,
                                    scale = lvim$vims[[1]]$scale, level = 1 - lvim$vims[[1]]$alpha)
   if (!is.na(lvim$vims[[1]]$p_value)) {
-    lvim$average_p_value <- vimp::vimp_hypothesis_test(
+    lvim$average_vim_p_value <- vimp::vimp_hypothesis_test(
       predictiveness_full = lvim$average_full, predictiveness_reduced = lvim$average_reduced,
-      se = lvim$average_se, delta = lvim$vims[[1]]$delta, alpha = lvim$vims[[1]]$alpha
+      se = lvim$average_se, delta = delta, alpha = lvim$vims[[1]]$alpha
 
     )$p_value
   }
