@@ -3,16 +3,15 @@
 #' Create a longitudinal variable importance object from several constituent
 #' cross-sectional variable importance objects.
 #'
-#' @param ... a comma-separated list of individual, cross-sectional variable importance objects. Assumed
+#' @param vim_list a list of individual, cross-sectional variable importance objects. Assumed
 #'   to be in order over time.
 #'
 #' @return an object of class \code{lvim}
-lvim <- function(..., timepoints = numeric()) {
-  validate_lvim(new_lvim(..., timepoints = timepoints))
+lvim <- function(vim_list = list(), timepoints = numeric()) {
+  validate_lvim(new_lvim(vim_list = vim_list, timepoints = timepoints))
 }
 
-new_lvim <- function(..., timepoints = numeric()) {
-  vim_list <- list(...)
+new_lvim <- function(vim_list = list(), timepoints = numeric()) {
   vim_list_classes <- unlist(
     lapply(seq_len(length(vim_list)), function(i) !any(grepl("vim", class(vim_list[[i]]))))
   )
@@ -37,12 +36,12 @@ new_lvim <- function(..., timepoints = numeric()) {
          "average_reduced" = NA, "average_eif_reduced" = rep(NA, length(vim_list[[1]]$eif_redu)),
          "average_full_se" = NA, "average_reduced_se" = NA,
          "average_full_ci" = c(NA, NA), "average_reduced_ci" = c(NA, NA),
-         "slope_vim" = NA, "slope_eif" = rep(NA, length(vim_list[[1]]$eif_full)),
-         "slope_vim_se" = NA, "slope_vim_ci" = c(NA, NA), "slope_vim_p_value" = NA,
-         "slope_full" = NA, "slope_eif_full" = rep(NA, length(vim_list[[1]]$eif_full)),
-         "slope_reduced" = NA, "slope_eif_reduced" = rep(NA, length(vim_list[[1]]$eif_redu)),
-         "slope_full_se" = NA, "slope_reduced_se" = NA,
-         "slope_full_ci" = c(NA, NA), "slope_reduced_ci" = c(NA, NA),
+         "trend_vim" = NA, "trend_eif" = rep(NA, length(vim_list[[1]]$eif_full)),
+         "trend_vim_se" = NA, "trend_vim_ci" = c(NA, NA), "trend_vim_p_value" = NA,
+         "trend_full" = NA, "trend_eif_full" = rep(NA, length(vim_list[[1]]$eif_full)),
+         "trend_reduced" = NA, "trend_eif_reduced" = rep(NA, length(vim_list[[1]]$eif_redu)),
+         "trend_full_se" = NA, "trend_reduced_se" = NA,
+         "trend_full_ci" = c(NA, NA), "trend_reduced_ci" = c(NA, NA),
          "auc_vim" = NA, "auc_eif" = rep(NA, length(vim_list[[1]]$eif_full)),
          "auc_vim_se" = NA, "auc_vim_ci" = c(NA, NA), "auc_vim_p_value" = NA,
          "auc_full" = NA, "auc_eif_full" = rep(NA, length(vim_list[[1]]$eif_full)),

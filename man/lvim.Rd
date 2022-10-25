@@ -4,10 +4,10 @@
 \alias{lvim}
 \title{Create a Longitudinal Variable Importance Object}
 \usage{
-lvim(..., timepoints = numeric())
+lvim(vim_list = list(), timepoints = numeric())
 }
 \arguments{
-\item{...}{a comma-separated list of individual, cross-sectional variable importance objects. Assumed
+\item{vim_list}{a list of individual, cross-sectional variable importance objects. Assumed
 to be in order over time.}
 }
 \value{

@@ -1,0 +1,90 @@
+---
+title: "Introduction to `lvimp`"
+output: 
+  rmarkdown::html_vignette:
+    keep_md: true
+vignette: >
+  %\VignetteIndexEntry{Introduction to `lvimp`}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+csl: chicago-author-date.csl
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Introduction
+
+`lvimp` is a package that computes nonparametric estimates of summaries of a nonparametric variable importance trajectory over time, and provides inference on the true summaries of the variable importance trajectory. The package depends heavily on the [`vimp` package](https://github.com/bdwilliamson/vimp) for estimating and doing inference on the cross-sectional variable importance at each timepoint in the trajectory.
+
+## Installation
+
+A development version of the package may be downloaded and installed from GitHub using the `remotes` package:
+```{r remotes-install, eval = FALSE}
+remotes::install_github("bdwilliamson/lvimp")
+```
+
+## Quick Start
+
+This section should serve as a quick guide to using the `lvimp` package. We will cover the three main functions for estimating summaries of the longitudinal variable importance trajectory using simulated data.
+
+First, load the `lvimp` package:
+```{r load-lvimp, message = FALSE}
+library("lvimp")
+```
+
+Next, create some longitudinal data:
+```{r gen-data}
+set.seed(4747)
+p <- 2
+n <- 5e4
+T <- 3
+timepoints <- seq_len(T) - 1
+indices <- timepoints + 1
+beta_01 <- rep(1, T)
+beta_02 <- 1 + timepoints / 4
+beta_0 <- lapply(as.list(seq_len(T)), function(t) {
+  matrix(c(beta_01[t], beta_02[t]))
+})
+# generate 2 covariates
+x <- lapply(as.list(1:T), function(t) as.data.frame(replicate(p, stats::rnorm(n, 0, 1))))
+# apply the function to the x's
+y <- lapply(as.list(1:T), function(t) as.matrix(x[[t]]) %*% beta_0[[t]] + rnorm(n, 0, 1))
+```
+
+In this scenario, there are three timepoints at which data are collected. The above code block creates a list `x` containing 3 matrices, each with 2 columns and `n` rows; and a list `y` containing three vectors of length `n`. Here, `x` contains the covariates of interest and `y` contains the outcomes of interest.
+
+Next, we use the `vimp` package to estimate the importance of variable 1 relative to variable 2 for predicting $Y$ at each timepoint:
+```{r cross-sectional-vim}
+library("vimp")
+library("SuperLearner")
+set.seed(1234)
+# in this case, glm is correctly specified (so only use one learner to speed things up)
+vim_list_1 <- lapply(as.list(1:T), function(t) {
+  vimp::cv_vim(Y = y[[t]], X = x[[t]], indx = 1, V = 10, type = "r_squared",
+               SL.library = c("SL.glm"))
+})
+```
+
+Finally, there are three available summaries in `lvimp`:
+* The average variable importance over a contiguous subset of the time series (`lvim_average`)
+* The linear trend in variable importance over a contiguous subset of the time series (`lvim_trend`)
+* The area under the variable importance trajectory curve over a contiguous subset of the time series (`lvim_auc`)
+
+We now estimate and do inference on these three summary measures:
+```{r est-lvim}
+# set up an lvim object
+lvim_obj <- lvim(vim_list_1, timepoints = 1:3)
+# obtain the average
+est_lvim <- lvim_average(lvim_obj, indices = 1:3)
+# add on the linear trend
+est_lvim <- lvim_trend(est_lvim, indices = 1:3)
+# add on the AUC based on a piecewise linear trajectory
+est_lvim <- lvim_auc(est_lvim, indices = 1:3)
+# inspect the estimates
+est_lvim
+```

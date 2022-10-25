@@ -80,7 +80,7 @@ lvim_auc <- function(lvim, indices = 1:length(lvim), interpolator = "linear",
                                    scale = lvim$vims[[1]]$scale,
                                    level = 1 - lvim$vims[[1]]$alpha)
   if (!is.na(lvim$vims[[1]]$p_value)) {
-    lvim$auc_vim_p_value <- vimp::vimp_hypothesis_test(
+    lvim$auc_p_value <- vimp::vimp_hypothesis_test(
       predictiveness_full = lvim$auc_full, predictiveness_reduced = lvim$auc_reduced,
       se = lvim$auc_vim_se, delta = 0, alpha = lvim$vims[[1]]$alpha
     )$p_value

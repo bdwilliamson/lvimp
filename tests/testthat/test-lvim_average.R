@@ -44,7 +44,7 @@ vim_list_2 <- lapply(as.list(1:T), function(t) {
 
 # test averages ----------------------------------------------------------------
 test_that("Averaging VIMs across the time series works", {
-  lvim_obj <- lvim(vim_list_1[[1]], vim_list_1[[2]], vim_list_1[[3]], timepoints = 1:3)
+  lvim_obj <- lvim(vim_list_1, timepoints = 1:3)
   est <- lvim_average(lvim_obj, indices = 1:3)
   expect_equal(est$average_full, mean(r2_full), tolerance = 0.1)
   expect_equal(est$average_reduced, mean(r2_two), tolerance = 0.1)

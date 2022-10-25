@@ -31,7 +31,7 @@ format.lvim <- function(x, digits = 3, ...) {
   if (!is.na(x$auc_vim)) {
     output <- rbind(output, cbind("AUC", format(x$auc_vim, digits = digits, ...),
                                   format(x$auc_vim_se, digits = digits, ...),
-                                  paste0("[", format(x$auc_vim_ci, digits = digits, ...), ", ",
+                                  paste0("[", format(x$auc_vim_ci[1], digits = digits, ...), ", ",
                                          format(x$auc_vim_ci[2], digits = digits, ...), "]"),
                                      NA, format(x$auc_p_value, digits = digits, ...)))
   }

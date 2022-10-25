@@ -48,7 +48,7 @@ vim_list_2 <- lapply(as.list(1:T), function(t) {
 
 # test linear trend ------------------------------------------------------------
 test_that("Linear trend in VIMs across the time series works", {
-  lvim_obj <- lvim(vim_list_1[[1]], vim_list_1[[2]], vim_list_1[[3]], timepoints = 1:3)
+  lvim_obj <- lvim(vim_list_1, timepoints = 1:3)
   est <- lvim_trend(lvim_obj, indices = 1:3)
   expect_equal(est$trend_full, trend_full, tolerance = 0.1)
   expect_equal(est$trend_reduced, trend_reduced, tolerance = 0.1)

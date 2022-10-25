@@ -40,6 +40,8 @@ piecewise_linear_estimate <- function(x) {
 }
 auc_full_linear <- piecewise_linear_estimate(r2_full)
 auc_reduced_linear_1 <- piecewise_linear_estimate(r2_two)
+partial_auc_full_linear <- piecewise_linear_estimate(r2_full[1:2])
+partial_auc_reduced_linear_1 <- piecewise_linear_estimate(r2_two[1:2])
 # true AUC of trajectory based on spline interpolator
 spline_full <- splinefun(x = indices, y = r2_full)
 spline_reduced_1 <- splinefun(x = indices, y = r2_two)
@@ -61,18 +63,27 @@ vim_list_2 <- lapply(as.list(1:T), function(t) {
 
 # test AUC of piecewise linear interpolator ------------------------------------
 test_that("AUC of piecewise linear interpolator of VIMs across the time series works", {
-  lvim_obj <- lvim(vim_list_1[[1]], vim_list_1[[2]], vim_list_1[[3]], timepoints = 1:3)
+  lvim_obj <- lvim(vim_list_1, timepoints = 1:3)
   est <- lvim_auc(lvim_obj, indices = 1:3)
   expect_equal(est$auc_full, auc_full_linear, tolerance = 0.1)
   expect_equal(est$auc_reduced, auc_reduced_linear_1, tolerance = 0.1)
   expect_equal(est$auc_vim, auc_full_linear - auc_reduced_linear_1, tolerance = 0.1)
 })
 
-# test AUC of spline interpolator ------------------------------------
+# test AUC of spline interpolator ----------------------------------------------
 test_that("AUC of spline interpolator of VIMs across the time series works", {
-  lvim_obj <- lvim(vim_list_1[[1]], vim_list_1[[2]], vim_list_1[[3]], timepoints = 1:3)
+  lvim_obj <- lvim(vim_list_1, timepoints = 1:3)
   est <- lvim_auc(lvim_obj, indices = 1:3, interpolator = "spline")
   expect_equal(est$auc_full, auc_full_spline, tolerance = 0.1)
   expect_equal(est$auc_reduced, auc_reduced_spline_1, tolerance = 0.1)
   expect_equal(est$auc_vim, auc_full_spline - auc_reduced_spline_1, tolerance = 0.1)
+})
+
+# test AUC of piecewise linear interpolator over a subset ----------------------
+test_that("AUC of piecewise linear interpolator of VIMs across the time series works", {
+  lvim_obj <- lvim(vim_list_1[1:2], timepoints = 1:2)
+  est <- lvim_auc(lvim_obj, indices = 1:2)
+  expect_equal(est$auc_full, partial_auc_full_linear, tolerance = 0.1)
+  expect_equal(est$auc_reduced, partial_auc_reduced_linear_1, tolerance = 0.1)
+  expect_equal(est$auc_vim, partial_auc_full_linear - partial_auc_reduced_linear_1, tolerance = 0.1)
 })
