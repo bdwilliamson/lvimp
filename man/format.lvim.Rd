@@ -4,10 +4,12 @@
 \alias{format.lvim}
 \title{Format a \code{lvim} object}
 \usage{
-\method{format}{lvim}(x, ...)
+\method{format}{lvim}(x, digits = 3, ...)
 }
 \arguments{
 \item{x}{the \code{lvim} object of interest}
+
+\item{digits}{the number of digits to format to}
 
 \item{...}{other options, see the generic \code{format} function}
 }

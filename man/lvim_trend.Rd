@@ -4,12 +4,16 @@
 \alias{lvim_trend}
 \title{Linear Trend in the Longitudinal Variable Importance Trajectory}
 \usage{
-lvim_trend(lvim, indices = 1:length(lvim))
+lvim_trend(lvim, indices = 1:length(lvim), delta = 0)
 }
 \arguments{
-\item{lvim}{an object of class \code{lvim} containing the cross-sectional variable importance objects}
+\item{lvim}{an object of class \code{lvim} containing the cross-sectional
+variable importance objects}
 
-\item{indices}{a numeric vector indicating the contiguous subset of the time series}
+\item{indices}{a numeric vector indicating the contiguous subset of the
+time series}
+
+\item{delta}{null hypothesis value}
 }
 \value{
 The \code{lvim} object, with point estimates, CIs, and p-values

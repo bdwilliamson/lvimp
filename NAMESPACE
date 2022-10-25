@@ -2,5 +2,6 @@
 
 S3method(format,lvim)
 S3method(print,lvim)
+export(lvim_auc)
 export(lvim_average)
 export(lvim_trend)
