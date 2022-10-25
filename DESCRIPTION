@@ -18,5 +18,8 @@ Suggests:
     rmarkdown,
     testthat (>= 3.0.0),
     SuperLearner
+License: MIT + file LICENSE
+URL: https://github.com/bdwilliamson/lvimp
+BugReports: https://github.com/bdwilliamson/lvimp/issues
 Config/testthat/edition: 3
 VignetteBuilder: knitr
