@@ -2,7 +2,8 @@ Package: lvimp
 Title: Perform Inference on Summaries of Longidutinal Algorithm-Agnostic Variable Importance
 Version: 0.0.0.9000
 Authors@R: 
-    person("Brian D.", "Williamson", "brian.d.williamson@kp.org", role = c("aut", "cre"),
+    person(given = "Brian D.", family = "Williamson", 
+           email = "brian.d.williamson@kp.org", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-7024-548X"))
 Description: Calculate point estimates of and valid confidence intervals for 
     longitudinal summaries of nonparametric, algorithm-agnostic variable importance measures.
