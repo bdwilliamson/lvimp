@@ -25,7 +25,7 @@ knitr::opts_chunk$set(
 
 A development version of the package may be downloaded and installed from GitHub using the `remotes` package:
 ```{r remotes-install, eval = FALSE}
-remotes::install_github("bdwilliamson/lvimp")
+pak::pkg_install("bdwilliamson/lvimp")
 ```
 
 ## Quick Start
