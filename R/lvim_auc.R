@@ -13,7 +13,7 @@
 #' @export
 lvim_auc <- function(lvim, indices = 1:length(lvim), interpolator = "linear",
                      delta = 0, ...) {
-  if (interpolator != "linear" | interpolator != "spline") {
+  if (interpolator != "linear" & interpolator != "spline") {
     stop("Currently, the only available interpolators are piecewise linear (enter 'linear') and cubic splines (enter 'spline').")
   }
   if (interpolator == "linear") {
@@ -48,13 +48,27 @@ lvim_auc <- function(lvim, indices = 1:length(lvim), interpolator = "linear",
                                   lower = range(indices)[1], upper = range(indices)[2])$value
     lvim$auc_vim <- lvim$auc_full - lvim$auc_reduced
     # estimate predictiveness, VIM EIFs
-    integrand_full <- function(x, eifs) {
-
-    }
-    lvim$auc_eif_full <- integrate(full_spline, deriv = 1,
-                                   lower = range(indices)[1], upper = range(indices)[2])
-    # lvim$auc_full_eif <-
+    lvim$auc_eif_full <- rowSums(
+      integrate(full_spline, deriv = 1,
+                lower = range(indices)[1], upper = range(indices)[2])$value *
+        lvim$eif_predictiveness_full
+    )
+    lvim$auc_eif_reduced <- rowSums(
+      integrate(reduced_spline, deriv = 1,
+                lower = range(indices)[1], upper = range(indices)[2])$value *
+        lvim$eif_predictiveness_reduced
+    )
+    lvim$auc_eif <- rowSums(
+      (integrate(full_spline, deriv = 1,
+                 lower = range(indices)[1], upper = range(indices)[2])$value -
+         integrate(reduced_spline, deriv = 1,
+                   lower = range(indices)[1], upper = range(indices)[2])$value) *
+        lvim$eif
+    )
   }
+  lvim$auc_full_se <- sqrt(mean(lvim$auc_eif_full ^ 2) / length(lvim$auc_eif_full))
+  lvim$auc_reduced_se <- sqrt(mean(lvim$auc_eif_reduced ^ 2) / length(lvim$auc_eif_reduced))
+  lvim$auc_vim_se <- sqrt(mean(lvim$auc_eif ^ 2) / length(lvim$auc_eif))
   # obtain CIs, hypothesis test of zero AUC VIM
   lvim$auc_full_ci <- vimp::vimp_ci(est = lvim$auc_full, se = lvim$auc_full_se,
                                     scale = lvim$vims[[1]]$scale,
@@ -69,6 +83,7 @@ lvim_auc <- function(lvim, indices = 1:length(lvim), interpolator = "linear",
     lvim$auc_vim_p_value <- vimp::vimp_hypothesis_test(
       predictiveness_full = lvim$auc_full, predictiveness_reduced = lvim$auc_reduced,
       se = lvim$auc_vim_se, delta = 0, alpha = lvim$vims[[1]]$alpha
-    )
+    )$p_value
   }
+  return(lvim)
 }
