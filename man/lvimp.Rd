@@ -10,8 +10,8 @@
 
 Methodology authors:
 \itemize{
-\item{Brian D. Williamson}
-\item{Susan M. Shortreed}
+  \item{Brian D. Williamson}
+  \item{Susan M. Shortreed}
 }
 }
 

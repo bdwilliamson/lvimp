@@ -7,6 +7,7 @@
 #'   to be in order over time.
 #'
 #' @return an object of class \code{lvim}
+#' @export
 lvim <- function(vim_list = list(), timepoints = numeric()) {
   validate_lvim(new_lvim(vim_list = vim_list, timepoints = timepoints))
 }

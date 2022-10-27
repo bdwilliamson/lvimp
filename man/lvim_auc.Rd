@@ -28,7 +28,7 @@ take the area under the trajectory}
 }
 \value{
 The \code{lvim} object, with point estimates, CIs, and p-values
-related to the area under the trend in variable importance filled in.
+  related to the area under the trend in variable importance filled in.
 }
 \description{
 Compute a nonparametric estimate of (and efficient influence function for) the

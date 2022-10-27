@@ -22,3 +22,4 @@ Suggests:
 URL: https://bdwilliamson.github.io/lvimp/
 BugReports: https://github.com/bdwilliamsonl/vimp/issues
 VignetteBuilder: knitr
+RoxygenNote: 7.2.1

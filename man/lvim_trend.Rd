@@ -17,7 +17,7 @@ time series}
 }
 \value{
 The \code{lvim} object, with point estimates, CIs, and p-values
-related to the linear trend in variable importance filled in.
+  related to the linear trend in variable importance filled in.
 }
 \description{
 Compute a nonparametric estimate of (and efficient influence function for) the
