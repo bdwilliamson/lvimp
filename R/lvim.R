@@ -50,7 +50,7 @@ new_lvim <- function(vim_list = list(), timepoints = numeric()) {
          "auc_reduced" = NA, "auc_eif_reduced" = rep(NA, length(vim_list[[1]]$eif_redu)),
          "auc_full_se" = NA, "auc_reduced_se" = NA,
          "auc_full_ci" = c(NA, NA), "auc_reduced_ci" = c(NA, NA)),
-    class = c("lvim", "list")
+    class = "lvim"
   )
 }
 
