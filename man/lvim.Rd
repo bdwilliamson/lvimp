@@ -9,6 +9,8 @@ lvim(vim_list = list(), timepoints = numeric())
 \arguments{
 \item{vim_list}{a list of individual, cross-sectional variable importance objects. Assumed
 to be in order over time.}
+
+\item{timepoints}{a numeric vector of timepoints of interest}
 }
 \value{
 an object of class \code{lvim}

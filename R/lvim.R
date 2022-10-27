@@ -5,6 +5,7 @@
 #'
 #' @param vim_list a list of individual, cross-sectional variable importance objects. Assumed
 #'   to be in order over time.
+#' @param timepoints a numeric vector of timepoints of interest
 #'
 #' @return an object of class \code{lvim}
 #' @export
