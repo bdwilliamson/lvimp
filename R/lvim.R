@@ -20,13 +20,20 @@ new_lvim <- function(vim_list = list(), timepoints = numeric()) {
   if (any(vim_list_classes)) {
     stop("Please enter only variable importance objects (from, e.g., a call to vimp::cv_vim).")
   }
+  eif_full_lengths <- unlist(lapply(vim_list, function(x) length(x$eif_full)))
+  if (var(eif_full_lengths) != 0) {
+    warning(paste0("One or more timepoints are based on differing numbers of observations.",
+    " This may be due to random variation if you used cross-fitting to estimate",
+    " variable importance. Any observations with missing values at any timepoint",
+    " will not be used for inference."))
+  }
   # obtain predictiveness, EIFs, VIMs across timepoints
   pred_full <- unlist(lapply(vim_list, function(x) x$predictiveness_full))
   pred_redu <- unlist(lapply(vim_list, function(x) x$predictiveness_reduced))
   vims <- pred_full - pred_redu
-  eif_full <- do.call(cbind, lapply(vim_list, function(x) x$eif_full))
-  eif_redu <- do.call(cbind, lapply(vim_list, function(x) x$eif_redu))
-  eifs <- do.call(cbind, lapply(vim_list, function(x) x$eif))
+  eif_full <- suppressWarnings(do.call(cbind, lapply(vim_list, function(x) x$eif_full)))
+  eif_redu <- suppressWarnings(do.call(cbind, lapply(vim_list, function(x) x$eif_redu)))
+  eifs <- suppressWarnings(do.call(cbind, lapply(vim_list, function(x) x$eif)))
   structure(
     list("vims" = vim_list, "timepoints" = timepoints,
          "predictiveness_full" = pred_full, "predictiveness_reduced" = pred_redu,
