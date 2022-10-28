@@ -21,16 +21,17 @@ lvim_average <- function(lvim, indices = 1:length(lvim), delta = 0) {
   lvim$average_eif_full <- rowMeans(lvim$eif_predictiveness_full)
   lvim$average_eif_reduced <- rowMeans(lvim$eif_predictiveness_reduced)
   lvim$average_eif <- rowMeans(lvim$eif)
-  lvim$average_full_se <- sqrt(mean(lvim$average_eif_full ^ 2) / length(lvim$average_eif_full))
-  lvim$average_reduced_se <- sqrt(mean(lvim$average_eif_reduced ^ 2) / length(lvim$average_eif_reduced))
-  lvim$average_vim_se <- sqrt(mean(lvim$average_eif ^ 2) / length(lvim$average_eif))
+  lvim$average_full_se <- sqrt(mean(lvim$average_eif_full ^ 2, na.rm = TRUE) / length(lvim$average_eif_full[complete.cases(lvim$average_eif_full)]))
+  lvim$average_reduced_se <- sqrt(mean(lvim$average_eif_reduced ^ 2, na.rm = TRUE) / length(lvim$average_eif_reduced[complete.cases(lvim$average_eif_reduced)]))
+  lvim$average_vim_se <- sqrt(mean(lvim$average_eif ^ 2, na.rm = TRUE) / length(lvim$average_eif[complete.cases(lvim$average_eif)]))
   # obtain CIs, hypothesis test of zero average variable importance
   lvim$average_full_ci <- vimp::vimp_ci(est = lvim$average_full, se = lvim$average_full_se,
                                         scale = lvim$vims[[1]]$scale, level = 1 - lvim$vims[[1]]$alpha)
   lvim$average_reduced_ci <- vimp::vimp_ci(est = lvim$average_reduced, se = lvim$average_reduced_se,
                                         scale = lvim$vims[[1]]$scale, level = 1 - lvim$vims[[1]]$alpha)
   lvim$average_vim_ci <- vimp::vimp_ci(est = lvim$average_vim, se = lvim$average_vim_se,
-                                       scale = lvim$vims[[1]]$scale, level = 1 - lvim$vims[[1]]$alpha)
+                                       scale = lvim$vims[[1]]$scale, level = 1 - lvim$vims[[1]]$alpha,
+                                       truncate = FALSE)
   if (!is.na(lvim$vims[[1]]$p_value)) {
     lvim$average_p_value <- vimp::vimp_hypothesis_test(
       predictiveness_full = lvim$average_full, predictiveness_reduced = lvim$average_reduced,

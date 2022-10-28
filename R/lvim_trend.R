@@ -19,9 +19,9 @@ lvim_trend <- function(lvim, indices = 1:length(lvim), delta = 0) {
   lvim$trend_eif_full <- beta_matrix %*% t(lvim$eif_predictiveness_full)
   lvim$trend_eif_reduced <- beta_matrix %*% t(lvim$eif_predictiveness_reduced)
   lvim$trend_eif <- beta_matrix %*% t(lvim$eif)
-  lvim$trend_full_se <- sqrt(rowMeans(lvim$trend_eif_full ^ 2) / ncol(lvim$trend_eif_full))
-  lvim$trend_reduced_se <- sqrt(rowMeans(lvim$trend_eif_reduced ^ 2) / ncol(lvim$trend_eif_reduced))
-  lvim$trend_vim_se <- sqrt(rowMeans(lvim$trend_eif ^ 2) / ncol(lvim$trend_eif))
+  lvim$trend_full_se <- sqrt(rowMeans(lvim$trend_eif_full ^ 2, na.rm = TRUE) / sum(complete.cases(t(lvim$trend_eif_full))))
+  lvim$trend_reduced_se <- sqrt(rowMeans(lvim$trend_eif_reduced ^ 2, na.rm = TRUE) / sum(complete.cases(t(lvim$trend_eif_reduced))))
+  lvim$trend_vim_se <- sqrt(rowMeans(lvim$trend_eif ^ 2, na.rm = TRUE) / sum(complete.cases(t(lvim$trend_eif))))
   # obtain CIs, hypothesis test of zero trend variable importance
   lvim$trend_full_ci <- do.call(rbind, lapply(as.list(seq_len(length(lvim$trend_full))), function(i) {
     vimp::vimp_ci(est = lvim$trend_full[i], se = lvim$trend_full_se[i],

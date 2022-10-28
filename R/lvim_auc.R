@@ -25,7 +25,7 @@ lvim_auc <- function(lvim, indices = 1:length(lvim), interpolator = "linear",
         x <- matrix(x, nrow = 1)
       }
       indices <- seq_len(ncol(x))
-      return(x[, range(indices)[1]] / 2 + x[, range(indices)[2]] / 2 + sum(x[, 2:(range(indices)[2] - 1)]))
+      return(x[, range(indices, na.rm = TRUE)[1]] / 2 + x[, range(indices, na.rm = TRUE)[2]] / 2 + sum(x[, 2:(range(indices, na.rm = TRUE)[2] - 1)], na.rm = TRUE))
     }
     # estimate AUC of interpolated trajectory for predictiveness, VIM
     lvim$auc_full <- piecewise_linear_estimate(lvim$predictiveness_full)
@@ -35,9 +35,6 @@ lvim_auc <- function(lvim, indices = 1:length(lvim), interpolator = "linear",
     lvim$auc_eif_full <- piecewise_linear_estimate(lvim$eif_predictiveness_full)
     lvim$auc_eif_reduced <- piecewise_linear_estimate(lvim$eif_predictiveness_reduced)
     lvim$auc_eif <- piecewise_linear_estimate(lvim$eif)
-    lvim$auc_full_se <- sqrt(mean(lvim$auc_eif_full ^ 2) / length(lvim$auc_eif_full))
-    lvim$auc_reduced_se <- sqrt(mean(lvim$auc_eif_reduced ^ 2) / length(lvim$auc_eif_reduced))
-    lvim$auc_vim_se <- sqrt(mean(lvim$auc_eif ^ 2) / length(lvim$auc_eif))
   } else if (interpolator == "spline") {
     # estimate AUC of interpolated trajectory for predictiveness, VIM
     full_spline <- splinefun(x = indices, y = lvim$predictiveness_full, ...)
@@ -66,9 +63,9 @@ lvim_auc <- function(lvim, indices = 1:length(lvim), interpolator = "linear",
         lvim$eif
     )
   }
-  lvim$auc_full_se <- sqrt(mean(lvim$auc_eif_full ^ 2) / length(lvim$auc_eif_full))
-  lvim$auc_reduced_se <- sqrt(mean(lvim$auc_eif_reduced ^ 2) / length(lvim$auc_eif_reduced))
-  lvim$auc_vim_se <- sqrt(mean(lvim$auc_eif ^ 2) / length(lvim$auc_eif))
+  lvim$auc_full_se <- sqrt(mean(lvim$auc_eif_full ^ 2, na.rm = TRUE) / length(lvim$auc_eif_full[complete.cases(lvim$auc_eif_full)]))
+  lvim$auc_reduced_se <- sqrt(mean(lvim$auc_eif_reduced ^ 2, na.rm = TRUE) / length(lvim$auc_eif_reduced[complete.cases(lvim$auc_eif_reduced)]))
+  lvim$auc_vim_se <- sqrt(mean(lvim$auc_eif ^ 2, na.rm = TRUE) / length(lvim$auc_eif[complete.cases(lvim$auc_eif)]))
   # obtain CIs, hypothesis test of zero AUC VIM
   lvim$auc_full_ci <- vimp::vimp_ci(est = lvim$auc_full, se = lvim$auc_full_se,
                                     scale = lvim$vims[[1]]$scale,
