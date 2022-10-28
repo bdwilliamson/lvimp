@@ -33,11 +33,15 @@ lvim_average <- function(lvim, indices = 1:length(lvim), delta = 0) {
                                        scale = lvim$vims[[1]]$scale, level = 1 - lvim$vims[[1]]$alpha,
                                        truncate = FALSE)
   if (!is.na(lvim$vims[[1]]$p_value)) {
-    lvim$average_p_value <- vimp::vimp_hypothesis_test(
+    lvim$average_vim_p_value <- vimp::vimp_hypothesis_test(
       predictiveness_full = lvim$average_full, predictiveness_reduced = lvim$average_reduced,
       se = lvim$average_vim_se, delta = delta, alpha = lvim$vims[[1]]$alpha
 
     )$p_value
+    average_full_test_statistic <- (lvim$average_full - delta) / lvim$average_full_se
+    lvim$average_full_p_value <- 2 * pnorm(abs(average_full_test_statistic), lower.tail = FALSE)
+    average_reduced_test_statistic <- (lvim$average_reduced - delta) / lvim$average_reduced_se
+    lvim$average_reduced_p_value <- 2 * pnorm(abs(average_reduced_test_statistic), lower.tail = FALSE)
   }
   return(lvim)
 }

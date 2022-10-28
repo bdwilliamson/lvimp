@@ -40,7 +40,11 @@ lvim_trend <- function(lvim, indices = 1:length(lvim), delta = 0) {
   }))
   if (!is.na(lvim$vims[[1]]$p_value)) {
     trend_test_statistic <- (lvim$trend_full[2] - lvim$trend_reduced[2] - delta) / lvim$trend_vim_se[2]
-    lvim$trend_p_value <- 2 * pnorm(abs(trend_test_statistic), lower.tail = FALSE)
+    lvim$trend_vim_p_value <- 2 * pnorm(abs(trend_test_statistic), lower.tail = FALSE)
+    trend_full_test_statistic <- (lvim$trend_full[2] - delta) / lvim$trend_full_se[2]
+    lvim$trend_full_p_value <- 2 * pnorm(abs(trend_full_test_statistic), lower.tail = FALSE)
+    trend_reduced_test_statistic <- (lvim$trend_reduced[2] - delta) / lvim$trend_reduced_se[2]
+    lvim$trend_reduced_p_value <- 2 * pnorm(abs(trend_reduced_test_statistic), lower.tail = FALSE)
   }
   return(lvim)
 }

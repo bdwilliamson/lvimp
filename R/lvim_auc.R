@@ -77,10 +77,14 @@ lvim_auc <- function(lvim, indices = 1:length(lvim), interpolator = "linear",
                                    scale = lvim$vims[[1]]$scale,
                                    level = 1 - lvim$vims[[1]]$alpha)
   if (!is.na(lvim$vims[[1]]$p_value)) {
-    lvim$auc_p_value <- vimp::vimp_hypothesis_test(
+    lvim$auc_vim_p_value <- vimp::vimp_hypothesis_test(
       predictiveness_full = lvim$auc_full, predictiveness_reduced = lvim$auc_reduced,
       se = lvim$auc_vim_se, delta = 0, alpha = lvim$vims[[1]]$alpha
     )$p_value
+    auc_full_test_statistic <- (lvim$auc_full - delta) / lvim$auc_full_se
+    lvim$auc_full_p_value <- 2 * pnorm(abs(auc_full_test_statistic), lower.tail = FALSE)
+    auc_reduced_test_statistic <- (lvim$auc_reduced - delta) / lvim$auc_reduced_se
+    lvim$auc_reduced_p_value <- 2 * pnorm(abs(auc_reduced_test_statistic), lower.tail = FALSE)
   }
   return(lvim)
 }
