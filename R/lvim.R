@@ -53,13 +53,13 @@ new_lvim <- function(vim_list = list(), timepoints = numeric()) {
          "trend_full_se" = NA, "trend_reduced_se" = NA,
          "trend_full_ci" = c(NA, NA), "trend_reduced_ci" = c(NA, NA),
          "trend_full_p_value" = c(NA, NA), "trend_reduced_p_value" = c(NA, NA),
-         "auc_vim" = NA, "auc_eif" = rep(NA, length(vim_list[[1]]$eif_full)),
-         "auc_vim_se" = NA, "auc_vim_ci" = c(NA, NA), "auc_vim_p_value" = NA,
-         "auc_full" = NA, "auc_eif_full" = rep(NA, length(vim_list[[1]]$eif_full)),
-         "auc_reduced" = NA, "auc_eif_reduced" = rep(NA, length(vim_list[[1]]$eif_redu)),
-         "auc_full_se" = NA, "auc_reduced_se" = NA,
-         "auc_full_ci" = c(NA, NA), "auc_reduced_ci" = c(NA, NA),
-         "auc_full_p_value" = NA, "auc_reduced_p_value" = NA),
+         "autc_vim" = NA, "autc_eif" = rep(NA, length(vim_list[[1]]$eif_full)),
+         "autc_vim_se" = NA, "autc_vim_ci" = c(NA, NA), "autc_vim_p_value" = NA,
+         "autc_full" = NA, "autc_eif_full" = rep(NA, length(vim_list[[1]]$eif_full)),
+         "autc_reduced" = NA, "autc_eif_reduced" = rep(NA, length(vim_list[[1]]$eif_redu)),
+         "autc_full_se" = NA, "autc_reduced_se" = NA,
+         "autc_full_ci" = c(NA, NA), "autc_reduced_ci" = c(NA, NA),
+         "autc_full_p_value" = NA, "autc_reduced_p_value" = NA),
     class = "lvim"
   )
 }

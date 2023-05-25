@@ -18,22 +18,22 @@ format.lvim <- function(x, digits = 3, ...) {
                                   format(x$average_vim_se, digits = digits, ...),
                                   paste0("[", format(x$average_vim_ci[1], digits = digits, ...), ", ",
                                          format(x$average_vim_ci[2], digits = digits, ...), "]"),
-                                     NA, format(x$average_p_value, digits = digits, ...)))
+                                     NA, format(x$average_vim_p_value, digits = digits, ...)))
   }
   if (!any(is.na(x$trend_vim))) {
     trend_vim_mat <- cbind(c("Linear trend: intercept", "Linear trend: slope"),
                            format(x$trend_vim, digits = digits, ...), format(x$trend_vim_se, digits = digits, ...),
                            paste0("[", format(x$trend_vim_ci[1], digits = digits, ...), ", ",
                                   format(x$trend_vim_ci[2], digits = digits, ...), "]"),
-                           NA, c(NA, format(x$trend_p_value, digits = digits, ...)))
+                           NA, c(NA, format(x$trend_vim_p_value, digits = digits, ...)))
     output <- rbind(output, trend_vim_mat)
   }
-  if (!is.na(x$auc_vim)) {
-    output <- rbind(output, cbind("AUC", format(x$auc_vim, digits = digits, ...),
-                                  format(x$auc_vim_se, digits = digits, ...),
-                                  paste0("[", format(x$auc_vim_ci[1], digits = digits, ...), ", ",
-                                         format(x$auc_vim_ci[2], digits = digits, ...), "]"),
-                                     NA, format(x$auc_p_value, digits = digits, ...)))
+  if (!is.na(x$autc_vim)) {
+    output <- rbind(output, cbind("AUTC", format(x$autc_vim, digits = digits, ...),
+                                  format(x$autc_vim_se, digits = digits, ...),
+                                  paste0("[", format(x$autc_vim_ci[1], digits = digits, ...), ", ",
+                                         format(x$autc_vim_ci[2], digits = digits, ...), "]"),
+                                     NA, format(x$autc_vim_p_value, digits = digits, ...)))
   }
   return(output)
 }
