@@ -23,8 +23,8 @@ format.lvim <- function(x, digits = 3, ...) {
   if (!any(is.na(x$trend_vim))) {
     trend_vim_mat <- cbind(c("Linear trend: intercept", "Linear trend: slope"),
                            format(x$trend_vim, digits = digits, ...), format(x$trend_vim_se, digits = digits, ...),
-                           paste0("[", format(x$trend_vim_ci[1], digits = digits, ...), ", ",
-                                  format(x$trend_vim_ci[2], digits = digits, ...), "]"),
+                           paste0("[", format(x$trend_vim_ci[, 1], digits = digits, ...), ", ",
+                                  format(x$trend_vim_ci[, 2], digits = digits, ...), "]"),
                            NA, c(NA, format(x$trend_vim_p_value, digits = digits, ...)))
     output <- rbind(output, trend_vim_mat)
   }
