@@ -36,7 +36,7 @@ piecewise_linear_estimate <- function(x) {
     x <- matrix(x, nrow = 1)
   }
   indices <- seq_len(ncol(x))
-  return(x[, range(indices)[1]] / 2 + x[, range(indices)[2]] / 2 + sum(x[, 2:(range(indices)[2] - 1)]))
+  return(x[, range(indices)[1]] / 2 + x[, range(indices)[2]] / 2 + colSums(x[, 2:(range(indices)[2] - 1), drop = FALSE]))
 }
 autc_full_linear <- piecewise_linear_estimate(r2_full)
 autc_reduced_linear_1 <- piecewise_linear_estimate(r2_two)
@@ -68,6 +68,7 @@ test_that("AUTC of piecewise linear interpolator of VIMs across the time series 
   expect_equal(est$autc_full, autc_full_linear, tolerance = 0.1)
   expect_equal(est$autc_reduced, autc_reduced_linear_1, tolerance = 0.1)
   expect_equal(est$autc_vim, autc_full_linear - autc_reduced_linear_1, tolerance = 0.1)
+  expect_true(est$autc_vim_se < 1)
 })
 
 # test AUTC of spline interpolator ----------------------------------------------
@@ -77,6 +78,7 @@ test_that("AUTC of spline interpolator of VIMs across the time series works", {
   expect_equal(est$autc_full, autc_full_spline, tolerance = 0.1)
   expect_equal(est$autc_reduced, autc_reduced_spline_1, tolerance = 0.1)
   expect_equal(est$autc_vim, autc_full_spline - autc_reduced_spline_1, tolerance = 0.1)
+  expect_true(est$autc_vim_se < 1)
 })
 
 # test AUTC of piecewise linear interpolator over a subset ----------------------
@@ -86,4 +88,5 @@ test_that("AUTC of piecewise linear interpolator of VIMs across the time series 
   expect_equal(est$autc_full, partial_autc_full_linear, tolerance = 0.1)
   expect_equal(est$autc_reduced, partial_autc_reduced_linear_1, tolerance = 0.1)
   expect_equal(est$autc_vim, partial_autc_full_linear - partial_autc_reduced_linear_1, tolerance = 0.1)
+  est$autc_vim_se < 1
 })
