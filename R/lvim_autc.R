@@ -25,7 +25,9 @@ lvim_autc <- function(lvim, indices = 1:length(lvim), interpolator = "linear",
         x <- matrix(x, nrow = 1)
       }
       indices <- seq_len(ncol(x))
-      return(x[, range(indices, na.rm = TRUE)[1]] / 2 + x[, range(indices, na.rm = TRUE)[2]] / 2 + colSums(x[, 2:(range(indices, na.rm = TRUE)[2] - 1)], na.rm = TRUE))
+      return(x[, range(indices, na.rm = TRUE)[1]] / 2 +
+               x[, range(indices, na.rm = TRUE)[2]] / 2 +
+               rowSums(x[, 2:(range(indices, na.rm = TRUE)[2] - 1), drop = FALSE], na.rm = TRUE))
     }
     # estimate AUTC of interpolated trajectory for predictiveness, VIM
     lvim$autc_full <- piecewise_linear_estimate(lvim$predictiveness_full)
