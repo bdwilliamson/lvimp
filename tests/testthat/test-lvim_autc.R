@@ -36,7 +36,9 @@ piecewise_linear_estimate <- function(x) {
     x <- matrix(x, nrow = 1)
   }
   indices <- seq_len(ncol(x))
-  return(x[, range(indices)[1]] / 2 + x[, range(indices)[2]] / 2 + colSums(x[, 2:(range(indices)[2] - 1), drop = FALSE]))
+  return(x[, range(indices)[1]] / 2 +
+           x[, range(indices)[2]] / 2 +
+           rowSums(x[, 2:(range(indices)[2] - 1), drop = FALSE]))
 }
 autc_full_linear <- piecewise_linear_estimate(r2_full)
 autc_reduced_linear_1 <- piecewise_linear_estimate(r2_two)
