@@ -20,6 +20,6 @@ Suggests:
     testthat,
     SuperLearner
 URL: https://bdwilliamson.github.io/lvimp/
-BugReports: https://github.com/bdwilliamsonl/vimp/issues
+BugReports: https://github.com/bdwilliamson/lvimp/issues
 VignetteBuilder: knitr
 RoxygenNote: 7.2.1

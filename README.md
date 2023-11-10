@@ -8,7 +8,7 @@
 
 In prediction settings where data are collected over time, it is often of interest to understand both the importance of variables for predicting the response at each time point and the importance summarized over the time series. Building on recent advances in estimation and inference for variable importance measures (specifically, the [vimp](https://github.com/bdwilliamson/vimp) package), we define summaries of variable importance trajectories. These measures can be estimated and the same approaches for inference can be applied regardless of the choice of the algorithm(s) used to estimate the prediction function. This package provides functions that, given fitted values from prediction algorithms, compute algorithm-agnostic estimates that summarize population variable importance over time. 
 
-More detail may be found in our [paper]().
+More detail may be found in our [paper](https://arxiv.org/pdf/2311.01638.pdf).
 
 ## Issues
 
