@@ -1,4 +1,4 @@
-# `R/lvimp`: inference on longitudinal summaries of algorithm-agnostic variable importance <img src="man/figures/lvimp_logo.png" align="right" width="120px"/
+# `R/lvimp`: inference on longitudinal summaries of algorithm-agnostic variable importance <img src="man/figures/lvimp_logo.png" align="right" width="120px"/>
 
  <!-- badges: start -->
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/lvimp)](https://cran.r-project.org/package=lvimp)
