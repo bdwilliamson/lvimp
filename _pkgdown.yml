@@ -1,0 +1,25 @@
+url: http://bdwilliamson.github.io/lvimp/
+destination: docs
+reference:
+- title: Summarize longitudinal variable importance
+  desc: Summarize longitudinal variable importance (VIM) trajectories
+  contents:
+  - lvim_autc
+  - lvim_average
+  - lvim_trend
+- title: Create a longitudinal VIM object
+  desc: Functions for creating a lvim object
+  contents:
+  - lvim
+- title: Internal package utility functions
+  desc: Functions for internal convenience, used by other functions.
+  contents:
+  - format.lvim
+  - print.lvim
+- title: Package documentation homepage
+  desc: Landing page for R help
+  contents:
+  - lvimp
+template:
+  bootstrap: 5
+

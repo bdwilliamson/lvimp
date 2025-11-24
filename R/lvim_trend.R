@@ -5,6 +5,9 @@
 #'
 #' @inheritParams lvim_average
 #'
+#' @importFrom stats complete.cases
+#' @importFrom stats pnorm
+#'
 #' @return The \code{lvim} object, with point estimates, CIs, and p-values
 #'   related to the linear trend in variable importance filled in.
 #' @export

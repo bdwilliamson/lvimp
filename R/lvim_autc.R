@@ -8,6 +8,11 @@
 #'   take the area under the trajectory
 #' @param ... other arguments to be passed to the interpolator function
 #'
+#' @importFrom stats splinefun
+#' @importFrom stats integrate
+#' @importFrom stats complete.cases
+#' @importFrom stats pnorm
+#'
 #' @return The \code{lvim} object, with point estimates, CIs, and p-values
 #'   related to the area under the trend in variable importance filled in.
 #' @export

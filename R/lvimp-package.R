@@ -22,6 +22,5 @@
 #' variable importance estimates; testthat and covr help with unit tests;
 #' and knitr and rmarkdown help with the vignettes and examples.
 #'
-#' @docType package
-#' @name lvimp
-NULL
+#' @keywords internal
+"_PACKAGE"

@@ -7,6 +7,8 @@
 #'   to be in order over time.
 #' @param timepoints a numeric vector of timepoints of interest
 #'
+#' @importFrom stats var
+#'
 #' @return an object of class \code{lvim}
 #' @export
 lvim <- function(vim_list = list(), timepoints = numeric()) {

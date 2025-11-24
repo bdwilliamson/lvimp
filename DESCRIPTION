@@ -1,7 +1,7 @@
 Package: lvimp
 Type: Package
 Title: Perform Inference on Summaries of Longitudinal Algorithm-Agnostic Variable Importance
-Version: 0.0.0.9000
+Version: 1.0.0
 Authors@R:
     c(person(given = "Brian D.",
              family = "Williamson",
@@ -22,4 +22,5 @@ Suggests:
 URL: https://bdwilliamson.github.io/lvimp/
 BugReports: https://github.com/bdwilliamson/lvimp/issues
 VignetteBuilder: knitr
-RoxygenNote: 7.2.1
+RoxygenNote: 7.3.2
+Encoding: UTF-8

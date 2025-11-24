@@ -9,6 +9,9 @@
 #'   time series
 #' @param delta null hypothesis value
 #'
+#' @importFrom stats complete.cases
+#' @importFrom stats pnorm
+#'
 #' @return The \code{lvim} object, with point estimates, CIs, and p-values
 #'   related to the average variable importance filled in.
 #' @export
