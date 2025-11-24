@@ -3,7 +3,7 @@ pkgdown: 2.2.0
 pkgdown_sha: ~
 articles:
   introduction-to-lvimp: introduction-to-lvimp.html
-last_built: 2025-11-24T19:12Z
+last_built: 2025-11-24T19:27Z
 urls:
   reference: http://bdwilliamson.github.io/lvimp/reference
   article: http://bdwilliamson.github.io/lvimp/articles

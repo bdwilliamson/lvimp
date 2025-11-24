@@ -1,5 +1,10 @@
 # `R/lvimp`: inference on longitudinal summaries of algorithm-agnostic variable importance
 
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/lvimp)](https://cran.r-project.org/package=lvimp)
+[![R-CMD-check](https://github.com/bdwilliamson/lvimp/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/bdwilliamson/lvimp/actions/workflows/R-CMD-check.yaml)
+[![License:
+MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 **Software author:** [Brian Williamson](https://bdwilliamson.github.io/)
 
 **Methodology authors:** [Brian
