@@ -13,6 +13,9 @@
 
 \item{...}{other options, see the generic \code{format} function}
 }
+\value{
+A formatted \code{lvim} object for printing.
+}
 \description{
 Format a \code{lvim} object
 }

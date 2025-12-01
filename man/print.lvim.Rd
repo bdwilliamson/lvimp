@@ -11,6 +11,9 @@
 
 \item{...}{other options, see the generic \code{print} function}
 }
+\value{
+No return value, called for side effects.
+}
 \description{
 Print a \code{lvim} object
 }
