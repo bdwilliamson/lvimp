@@ -18,3 +18,7 @@ print(x, ...)
 - ...:
 
   other options, see the generic `print` function
+
+## Value
+
+No return value, called for side effects.

@@ -22,3 +22,7 @@ format(x, digits = 3, ...)
 - ...:
 
   other options, see the generic `format` function
+
+## Value
+
+A formatted `lvim` object for printing.
