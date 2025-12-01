@@ -2,6 +2,8 @@
 #'
 #' @param x the \code{lvim} object of interest
 #' @param ... other options, see the generic \code{print} function
+#'
+#' @return No return value, called for side effects.
 #' @export
 print.lvim <- function(x, ...) {
   cat("Variable importance estimates:\n")

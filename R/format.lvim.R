@@ -3,6 +3,9 @@
 #' @param x the \code{lvim} object of interest
 #' @param digits the number of digits to format to
 #' @param ... other options, see the generic \code{format} function
+#'
+#' @return A formatted \code{lvim} object for printing.
+#'
 #' @export
 format.lvim <- function(x, digits = 3, ...) {
   # create the output matrix
