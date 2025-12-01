@@ -6,7 +6,7 @@
 \alias{lvimp-package}
 \title{lvimp: Perform Inference on Summaries of Longidutinal Algorithm-Agnostic Variable Importance}
 \description{
-Calculate point estimates of and valid confidence intervals for longitudinal summaries of nonparametric, algorithm-agnostic variable importance measures. For more details, see Williamson et al. (2024) \url{https://arxiv.org/abs/2311.01638}
+Calculate point estimates of and valid confidence intervals for longitudinal summaries of nonparametric, algorithm-agnostic variable importance measures. For more details, see Williamson et al. (2024) \doi{10.48550/arXiv.2311.01638}
 }
 \section{Authors}{
 
