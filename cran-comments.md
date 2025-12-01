@@ -1,6 +1,6 @@
 ## Initial submission
 
-This is an initial submission.
+This is a resubmission of an initial submission. I have updated the DESCRIPTION and added \value tags of exported functions.
 
 ## Test environments:
 * local windows-x86_64, R 4.4.0
