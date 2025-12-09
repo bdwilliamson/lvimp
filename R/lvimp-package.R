@@ -7,6 +7,7 @@
 #' Methodology authors:
 #' \itemize{
 #'   \item{Brian D. Williamson}
+#'   \item{Erica E.M. Moodie}
 #'   \item{Susan M. Shortreed}
 #' }
 #'
