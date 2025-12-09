@@ -8,7 +8,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/bdwilliamson/lvimp/blob/v1.0.0/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/bdwilliamson/lvimp/blob/main/DESCRIPTION)
 
 Williamson B (2025). *lvimp: Perform Inference on Summaries of
 Longitudinal Algorithm-Agnostic Variable Importance*. R package version
